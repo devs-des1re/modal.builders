@@ -111,15 +111,15 @@ function FormReactSelect({ ...props }: any) {
         }),
         multiValue: (baseStyles) => ({
           ...baseStyles,
-          background: "#28282d", // bg-background-surface-high
+          background: "var(--surface-higher)", // bg-background-surface-high
           border: "1px solid #97979f1f", // border-border-subtle
-          color: "#ffffff", // text-white
+          color: "var(--text-header-primary)", // text-white
           alignItems: "center",
           borderRadius: '4px'
         }),
         multiValueLabel: (baseStyles) => ({
           ...baseStyles,
-          color: "#ffffff", // text-white
+          color: "var(--text-header-primary)", // text-white
           padding: "2px 6px",
         }),
         multiValueRemove: (baseStyles) => ({
@@ -133,23 +133,24 @@ function FormReactSelect({ ...props }: any) {
         option: (baseStyles, state) => ({
           ...baseStyles,
           background: state.isSelected
-            ? "#28282d"
+            ? "var(--surface-higher)"
             : state.isFocused
-              ? "#242429"
+              ? "var(--surface-high)"
               : "transparent",
+          color: "var(--text-header-primary)",
           padding: "9.75px",
           display: "flex",
           ":active": {
             background: state.isSelected
-              ? "#28282d"
+              ? "var(--surface-higher)"
               : state.isFocused
-                ? "#242429"
+                ? "var(--surface-high)"
                 : "transparent",
           },
         }),
         menu: (baseStyles) => ({
           ...baseStyles,
-          color: "oklab(0.786807 -0.0025776 -0.0110238)",
+          color: "var(--text-normal)",
           background: "var(--surface-higher)",
           marginTop: '8px',
           border: '1px solid #97979f1f',
