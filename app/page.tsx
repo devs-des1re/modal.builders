@@ -579,7 +579,7 @@ export default function Home() {
           />
 
           {codeGenMode === 'json' ? (
-          <pre className="mt-2 overflow-auto lg:overflow-visible border border-border-subtle rounded-md p-4 bg-base-low">
+            <pre className="mt-2 overflow-x-auto border border-border-subtle rounded-md p-4 bg-base-low">
             <code 
               className="language-json"
               dangerouslySetInnerHTML={{
@@ -588,7 +588,7 @@ export default function Home() {
             />
           </pre>
           ) : (
-          <pre className="mt-2 overflow-auto lg:overflow-visible border border-border-subtle rounded-md p-4 bg-base-low">
+            <pre className="mt-2 overflow-x-auto border border-border-subtle rounded-md p-4 bg-base-low">
             <code 
               className="language-javascript"
               dangerouslySetInnerHTML={{
@@ -694,7 +694,10 @@ export default function Home() {
         if (defaultValues.length > 0) {
           const valuesStr = defaultValues.map((v: any) => {
             const typeEnum = v.type === 'user' ? 'SelectMenuDefaultValueType.User' : 'SelectMenuDefaultValueType.Role';
-            return `\n                  { id: ${JSON.stringify(v.id)}, type: ${typeEnum} }`;
+            return `\n                  {
+                    id: ${JSON.stringify(v.id)},
+                    type: ${typeEnum}
+                  }`;
           }).join(',');
           formattedDefaults = `
                 .setDefaultValues([${valuesStr}
