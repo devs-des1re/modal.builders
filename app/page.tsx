@@ -117,7 +117,6 @@ export default function Home() {
   const [isUrlTooLong, setIsUrlTooLong] = useState(false);
   const isInitialMount = useRef(true);
   const [codeGenMode, setCodeGenMode] = useState<'json' | 'djs'>('json');
-  const [isAlphaEnabled, setIsAlphaEnabled] = useState(false);
 
   const form = useForm<z.infer<typeof modalSchema>>({
     resolver: zodResolver(modalSchema),
@@ -138,7 +137,7 @@ export default function Home() {
   });
   const { fields, append, remove, move } = useFieldArray({ name: 'components', control: form.control });
 
-  // Load code generation mode and alpha flag from URL query params on initial mount
+  // Load code generation mode from URL query params on initial mount
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const searchParams = new URLSearchParams(window.location.search);
@@ -149,9 +148,6 @@ export default function Home() {
     } else {
       setCodeGenMode('json');
     }
-    
-    const alpha = searchParams.get('alpha');
-    setIsAlphaEnabled(alpha === 'true');
   }, []);
 
   // Load form state from URL fragment on initial mount
@@ -420,7 +416,6 @@ export default function Home() {
                               ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M15 12.0024V13C15 14.1046 15.8954 15 17 15C18.1046 15 19 14.1046 19 13V12C19 10.5021 18.5197 9.04388 17.6294 7.83935C16.7391 6.63482 15.4856 5.74757 14.0537 5.3081C12.6218 4.86863 11.0866 4.90001 9.67383 5.39771C8.26109 5.89542 7.04534 6.83359 6.20508 8.07355C5.36482 9.31351 4.94457 10.7899 5.00587 12.2865C5.06717 13.7831 5.60688 15.2207 6.54573 16.3878C7.48458 17.5549 8.77336 18.3899 10.2221 18.7704C11.6708 19.1509 13.2027 19.0566 14.5939 18.5015M15 12.0024C14.9987 13.6582 13.656 15 12 15C10.3431 15 9 13.6568 9 12C9 10.3431 10.3431 8.99999 12 8.99999C13.656 8.99999 14.9987 10.3418 15 11.9976M15 12.0024V11.9976M15 11.9976V8.99999" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>User & Role Select</DropdownMenuItem>
-                              {isAlphaEnabled && (
                               <DropdownMenuItem
                                 disabled={fields.length >= 5}
                                 onClick={() =>
@@ -435,7 +430,6 @@ export default function Home() {
                                 }
                               ><svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M13.82 21.7c.17.05.14.3-.04.3H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h7.5c.28 0 .5.22.5.5V5a5 5 0 0 0 5 5h2.5c.28 0 .5.22.5.5v2.3a.4.4 0 0 1-.68.27l-.2-.2a3 3 0 0 0-4.24 0l-4 4a3 3 0 0 0 0 4.25c.3.3.6.46.94.58Z"></path><path fill="currentColor" d="M21.66 8c.03 0 .05-.03.04-.06a3 3 0 0 0-.58-.82l-4.24-4.24a3 3 0 0 0-.82-.58.04.04 0 0 0-.06.04V5a3 3 0 0 0 3 3h2.66ZM18.3 14.3a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1-1.4 1.4L20 17.42V23a1 1 0 1 1-2 0v-5.59l-2.3 2.3a1 1 0 0 1-1.4-1.42l4-4Z"></path></svg>
                                 File Upload</DropdownMenuItem>
-                              )}
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </div>
